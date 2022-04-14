@@ -35,6 +35,7 @@ git checkout -b update-$DEFAULT_BRANCH-version
 
 CHANGED="0"
 for FILE in appinfo/info.xml \
+            package.json
 do
   if [ -f $FILE ]; then
     echo ""
