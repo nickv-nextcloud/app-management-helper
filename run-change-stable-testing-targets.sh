@@ -5,14 +5,20 @@
 # 2. If an "include" or "exclude" rule exists for "master" copy that for "stable24"
 
 BRANCH=$1
+VERSION=$2
 
 if ! [[ "$BRANCH" ]]; then
     echo "Missing target branch"
     exit 1
 fi
 
+if ! [[ "$VERSION" ]]; then
+    echo "Missing nextcloud version"
+    exit 1
+fi
+
 STILL_SKIP="0"
-SKIP_UNTIL=$2
+SKIP_UNTIL=$3
 
 if [[ "$SKIP_UNTIL" ]]; then
     STILL_SKIP="1"
@@ -30,7 +36,7 @@ do
     if [[ "$STILL_SKIP" = "0" ]]; then
         echo ${dir##*/}
         cd ${dir##*/}
-        ../../change-stable-testing-targets.sh $BRANCH
+        ../../change-stable-testing-targets.sh $BRANCH $VERSION
         cd ..
     else
         echo "Skipping ${dir##*/}"
@@ -50,7 +56,7 @@ do
         echo ${dir##*/}
         cd ${dir##*/}
         ../../create-stable-branch.sh $BRANCH
-        ../../change-stable-testing-targets.sh $BRANCH
+        ../../change-stable-testing-targets.sh $BRANCH $VERSION
         cd ..
     else
         echo "Skipping ${dir##*/}"
@@ -70,7 +76,7 @@ do
         echo ${dir##*/}
         cd ${dir##*/}
         DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
-        ../../change-stable-testing-targets.sh $DEFAULT_BRANCH
+        ../../change-stable-testing-targets.sh $DEFAULT_BRANCH $VERSION
         cd ..
     else
         echo "Skipping ${dir##*/}"

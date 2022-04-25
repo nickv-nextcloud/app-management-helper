@@ -3,6 +3,7 @@
 # Checkout and update the branch on all repos
 
 CORE_BRANCH=$1
+VERSION=$2
 
 set -e
 
@@ -69,7 +70,7 @@ fi
 echo ""
 echo "Commit branch"
 echo "======================"
-git commit -m "Update $CORE_BRANCH target versions
+git commit -m "Adjust testing matrix for Nextcloud $VERSION on $CORE_BRANCH
 
 Signed-off-by: Joas Schilling <coding@schilljs.com>"
 
