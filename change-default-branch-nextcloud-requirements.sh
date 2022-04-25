@@ -56,7 +56,7 @@ done
 echo ""
 echo "Commit branch"
 echo "======================"
-git commit -m "Add Nextcloud $NEW_VERSION support
+git commit -m "Add Nextcloud $NEW_VERSION support on $DEFAULT_BRANCH
 
 Signed-off-by: Joas Schilling <coding@schilljs.com>"
 
