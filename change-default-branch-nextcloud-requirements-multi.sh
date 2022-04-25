@@ -2,6 +2,8 @@
 #
 # Checkout and update the branch on all repos
 
+NEW_VERSION=$1
+
 set -e
 
 DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
@@ -53,7 +55,7 @@ done
 echo ""
 echo "Commit branch"
 echo "======================"
-git commit -m "Update version on $DEFAULT_BRANCH
+git commit -m "Add Nextcloud $NEW_VERSION support
 
 Signed-off-by: Joas Schilling <coding@schilljs.com>"
 

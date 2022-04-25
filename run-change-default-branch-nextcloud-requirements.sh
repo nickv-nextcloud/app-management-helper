@@ -5,7 +5,14 @@
 # 2. In Branched/ and Stable/ bump the Minor version of the app: `<version>1.12.0</version>`
 
 STILL_SKIP="0"
-SKIP_UNTIL=$1
+NEW_VERSION=$1
+SKIP_UNTIL=$2
+
+
+if ! [[ "$NEW_VERSION" ]]; then
+    echo "Missing nextcloud version"
+    exit
+fi
 
 if [[ "$SKIP_UNTIL" ]]; then
     STILL_SKIP="1"
@@ -22,7 +29,7 @@ do
     if [[ "$STILL_SKIP" = "0" ]]; then
         echo ${dir##*/}
         cd ${dir##*/}
-        ../../change-default-branch-nextcloud-requirements.sh
+        ../../change-default-branch-nextcloud-requirements.sh $NEW_VERSION
         cd ..
     else
         echo "Skipping ${dir##*/}"
@@ -41,7 +48,7 @@ do
     if [[ "$STILL_SKIP" = "0" ]]; then
         echo ${dir##*/}
         cd ${dir##*/}
-        ../../change-default-branch-nextcloud-requirements.sh
+        ../../change-default-branch-nextcloud-requirements.sh $NEW_VERSION
         cd ..
     else
         echo "Skipping ${dir##*/}"
@@ -60,7 +67,7 @@ do
     if [[ "$STILL_SKIP" = "0" ]]; then
         echo ${dir##*/}
         cd ${dir##*/}
-        ../../change-default-branch-nextcloud-requirements-multi.sh
+        ../../change-default-branch-nextcloud-requirements-multi.sh $NEW_VERSION
         cd ..
     else
         echo "Skipping ${dir##*/}"
