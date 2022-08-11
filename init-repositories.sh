@@ -98,6 +98,7 @@ for REPOSITORY in announcementcenter \
                   preferred_providers \
                   quota_warning \
                   ransomware_protection \
+                  recognize \
                   registration \
                   social \
                   suspicious_login \
