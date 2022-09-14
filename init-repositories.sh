@@ -16,6 +16,7 @@ for REPOSITORY in activity \
                   photos \
                   privacy \
                   recommendations \
+                  related_resources \
                   serverinfo \
                   support \
                   survey_client \
