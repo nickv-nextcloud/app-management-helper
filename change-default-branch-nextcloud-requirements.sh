@@ -4,8 +4,6 @@
 
 NEW_VERSION=$1
 
-set -e
-
 DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 REPO=${PWD##*/}
 
@@ -21,23 +19,22 @@ echo "Checkout $DEFAULT_BRANCH"
 echo "======================"
 git reset --hard origin/$DEFAULT_BRANCH
 
-set +e
-
 echo ""
 echo "Delete existing branch"
 echo "======================"
 git branch -D update-$DEFAULT_BRANCH-version
-
-set -e
 
 echo ""
 echo "Checkout branch"
 echo "======================"
 git checkout -b update-$DEFAULT_BRANCH-version
 
+set -e
+
 CHANGED="0"
 for FILE in appinfo/info.xml \
-            package.json
+            package.json \
+            .github/workflows/update-christophwurst-nextcloud.yml
 do
   if [ -f $FILE ]; then
     echo ""
@@ -52,6 +49,13 @@ do
     CHANGED="1"
   fi
 done
+
+set +e
+
+if [[ "$CHANGED" = "0" ]]; then
+    echo "No update needed"
+    exit 1
+fi
 
 echo ""
 echo "Commit branch"
