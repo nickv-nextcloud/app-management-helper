@@ -81,7 +81,6 @@ for REPOSITORY in announcementcenter \
                   files_downloadlimit \
                   files_texteditor \
                   files_zip \
-                  forms \
                   guests \
                   integration_discourse \
                   integration_github \
