@@ -49,6 +49,7 @@ for REPOSITORY in backup \
                   flow_notifications \
                   fulltextsearch \
                   fulltextsearch_elasticsearch \
+                  globalsiteselector \
                   groupfolders \
                   impersonate \
                   ldap_contacts_backend \
@@ -81,7 +82,6 @@ for REPOSITORY in announcementcenter \
                   files_texteditor \
                   files_zip \
                   forms \
-                  globalsiteselector \
                   guests \
                   integration_discourse \
                   integration_github \
