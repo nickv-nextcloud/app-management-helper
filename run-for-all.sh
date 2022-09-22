@@ -18,7 +18,11 @@ do
     fi
 
     if [[ "$STILL_SKIP" = "0" ]]; then
-        echo ${dir##*/}
+        echo "#"
+        echo "#"
+        echo "# ${dir##*/}"
+        echo "#"
+        echo "#"
         cd ${dir##*/}
         ../../$SCRIPT_NAME.sh
         cd ..
@@ -37,7 +41,11 @@ do
     fi
 
     if [[ "$STILL_SKIP" = "0" ]]; then
-        echo ${dir##*/}
+        echo "#"
+        echo "#"
+        echo "# ${dir##*/}"
+        echo "#"
+        echo "#"
         cd ${dir##*/}
         ../../$SCRIPT_NAME.sh
         cd ..
@@ -56,7 +64,11 @@ do
     fi
 
     if [[ "$STILL_SKIP" = "0" ]]; then
-        echo ${dir##*/}
+        echo "#"
+        echo "#"
+        echo "# ${dir##*/}"
+        echo "#"
+        echo "#"
         cd ${dir##*/}
         ../../$SCRIPT_NAME.sh
         cd ..

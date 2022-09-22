@@ -34,7 +34,11 @@ do
     fi
 
     if [[ "$STILL_SKIP" = "0" ]]; then
-        echo ${dir##*/}
+        echo "#"
+        echo "#"
+        echo "# ${dir##*/}"
+        echo "#"
+        echo "#"
         cd ${dir##*/}
         ../../change-stable-testing-targets.sh $BRANCH $VERSION
         cd ..
@@ -53,7 +57,11 @@ do
     fi
 
     if [[ "$STILL_SKIP" = "0" ]]; then
-        echo ${dir##*/}
+        echo "#"
+        echo "#"
+        echo "# ${dir##*/}"
+        echo "#"
+        echo "#"
         cd ${dir##*/}
         ../../create-stable-branch.sh $BRANCH
         ../../change-stable-testing-targets.sh $BRANCH $VERSION
@@ -73,7 +81,11 @@ do
     fi
 
     if [[ "$STILL_SKIP" = "0" ]]; then
-        echo ${dir##*/}
+        echo "#"
+        echo "#"
+        echo "# ${dir##*/}"
+        echo "#"
+        echo "#"
         cd ${dir##*/}
         DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
         ../../change-stable-testing-targets.sh $DEFAULT_BRANCH $VERSION
