@@ -4,6 +4,7 @@
 mkdir Branched
 cd Branched/
 for REPOSITORY in activity \
+                  bruteforcesettings \
                   circles \
                   files_pdfviewer \
                   files_rightclick \
@@ -20,7 +21,9 @@ for REPOSITORY in activity \
                   serverinfo \
                   support \
                   survey_client \
+                  suspicious_login \
                   text \
+                  twofactor_totp \
                   viewer
 do
     URL="git@github.com:nextcloud/$REPOSITORY.git"
@@ -70,7 +73,6 @@ cd ../
 mkdir Multibranch
 cd Multibranch/
 for REPOSITORY in announcementcenter \
-                  bruteforcesettings \
                   calendar \
                   contacts \
                   files_antivirus \
@@ -102,9 +104,7 @@ for REPOSITORY in announcementcenter \
                   recognize \
                   registration \
                   social \
-                  suspicious_login \
                   talk_matterbridge \
-                  twofactor_totp \
                   twofactor_u2f \
                   twofactor_webauthn \
                   user_oidc \
