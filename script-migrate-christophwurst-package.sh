@@ -62,6 +62,8 @@ fi
 composer remove --no-update --dev christophwurst/nextcloud
 composer require --dev nextcloud/ocp:dev-$PACKAGE_VERSION
 
+cat <<< $(jq --tab '.["autoload-dev"]["psr-4"]["OCP\\"] = "vendor/nextcloud/ocp/OCP"' composer.json) > composer.json
+
 git add composer.*
 
 echo ""
