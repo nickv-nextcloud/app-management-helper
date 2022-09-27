@@ -43,10 +43,10 @@ echo "======================"
 
 if [ -f .github/workflows/update-christophwurst-nextcloud.yml ]; then
 	git rm .github/workflows/update-christophwurst-nextcloud.yml
-
-	wget -O .github/workflows/update-nextcloud-ocp.yml https://raw.githubusercontent.com/nextcloud/.github/master/workflow-templates/update-nextcloud-ocp.yml
-	git add .github/workflows/update-nextcloud-ocp.yml
 fi
+
+wget -O .github/workflows/update-nextcloud-ocp.yml https://raw.githubusercontent.com/nextcloud/.github/master/workflow-templates/update-nextcloud-ocp.yml
+git add .github/workflows/update-nextcloud-ocp.yml
 
 if [ -f .github/workflows/psalm.yml ]; then
 	wget -O .github/workflows/psalm.yml https://raw.githubusercontent.com/nextcloud/.github/master/workflow-templates/psalm.yml
@@ -60,7 +60,7 @@ if [ -f .github/workflows/static-analysis.yml ]; then
 fi
 
 composer remove --no-update --dev christophwurst/nextcloud
-composer require --dev nextcloud/ocp:dev-$PACKAGE_VERSION
+composer require -W --dev nextcloud/ocp:dev-$PACKAGE_VERSION
 
 cat <<< $(jq --tab '.["autoload-dev"]["psr-4"]["OCP\\"] = "vendor/nextcloud/ocp/OCP"' composer.json) > composer.json
 
