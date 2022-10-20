@@ -21,36 +21,91 @@ echo "Reset $HEAD_BRANCH"
 echo "======================"
 git reset --hard origin/$HEAD_BRANCH
 
+echo "" >> ../../security-report.txt
+echo "## [$REPO](https://github.com/nextcloud/$REPO) - [Security tab](https://github.com/nextcloud/$REPO/security/dependabot)" >> ../../security-report.txt
+echo "" >> ../../security-report.txt
+
+
 echo ""
-echo "Check composer.json existance"
+echo "Check composer.json"
 echo "======================"
 
+COMPOSER_AUDIT=""
 if [ ! -f composer.json ]; then
-	echo "- [x] $REPO: 🏳️ No composer.json" >> ../../security-report.txt
+	echo "- [x] ⚙️ PHP: 🏳️ No composer.json" >> ../../security-report.txt
 	echo ""
 	echo "🏳️ No composer.json"
 	echo ""
-	exit 0
+else
+	set +e
+	composer install --no-dev
+	COMPOSER_AUDIT=$(composer audit 2>&1)
+	AUDIT_FAILED=$?
+	set -e
+
+	if [ "$AUDIT_FAILED" = "0" ]; then
+		echo "- [x] ⚙️ PHP: 🟢 No vulnerable depdendency" >> ../../security-report.txt
+		echo ""
+		echo "🟢 All ⚙️ PHP packages okay!"
+		echo ""
+	else
+		echo "- [ ] ⚙️ PHP: ❌ Has at least one vulnerable depdendency" >> ../../security-report.txt
+		echo ""
+		echo "❌ $REPO is depending on insecure ⚙️ PHP package"
+		echo ""
+	fi
 fi
 
-echo ""
-echo "Install or update roave/security-advisories to check for vulnerabilities"
-echo "======================"
-
-set +e
-composer require --dev roave/security-advisories:dev-latest
-INSTALL_FAILED=$?
-set -e
-
-if [ "$INSTALL_FAILED" = "0" ]; then
-	echo "- [x] $REPO: ✅ No vulnerable depdendency" >> ../../security-report.txt
+NPM_AUDIT=""
+if [ ! -f package.json ]; then
+	echo "- [x] 🖌️ JS: 🏳️ No package.json" >> ../../security-report.txt
 	echo ""
-	echo "✅ All packages okay!"
+	echo "🏳️ No package.json"
 	echo ""
 else
-	echo "- [ ] $REPO: ❌ Has at least one vulnerable depdendency" >> ../../security-report.txt
-	echo ""
-	echo "❌ $REPO is depending on insecure package"
-	echo ""
+	set +e
+	NPM_AUDIT=$(npm audit)
+	AUDIT_FAILED=$?
+	set -e
+
+	if [ "$AUDIT_FAILED" = "0" ]; then
+		echo "- [x] 🖌️ JS: 🟢 No vulnerable depdendency" >> ../../security-report.txt
+		echo ""
+		echo "🟢 All 🖌️ JS packages okay!"
+		echo ""
+	else
+		echo "- [ ] 🖌️ JS: ❌ Has at least one vulnerable depdendency" >> ../../security-report.txt
+		echo ""
+		echo "❌ $REPO is depending on insecure 🖌️ JS package"
+		echo ""
+	fi
 fi
+
+if [ "$COMPOSER_AUDIT$NPM_AUDIT" ]; then
+	echo "" >> ../../security-report.txt
+	echo "<details>" >> ../../security-report.txt
+	echo "" >> ../../security-report.txt
+
+	if [ "$COMPOSER_AUDIT" ]; then
+		echo "### Composer" >> ../../security-report.txt
+		echo "\`\`\`" >> ../../security-report.txt
+		echo "$COMPOSER_AUDIT" >> ../../security-report.txt
+		echo "\`\`\`" >> ../../security-report.txt
+		echo "" >> ../../security-report.txt
+	fi
+
+	if [ "$NPM_AUDIT" ]; then
+		echo "### NPM" >> ../../security-report.txt
+		echo "\`\`\`" >> ../../security-report.txt
+		echo "$NPM_AUDIT" >> ../../security-report.txt
+		echo "\`\`\`" >> ../../security-report.txt
+		echo "" >> ../../security-report.txt
+	fi
+	echo "</details>" >> ../../security-report.txt
+	echo "" >> ../../security-report.txt
+fi
+
+echo "" >> ../../security-report.txt
+
+
 
