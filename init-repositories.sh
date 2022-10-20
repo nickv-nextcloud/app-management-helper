@@ -60,7 +60,6 @@ for REPOSITORY in backup \
                   spreed \
                   terms_of_service \
                   user_migration \
-                  user_retention \
                   user_usage_report \
                   workflow_pdf_converter \
                   workflow_script
@@ -107,6 +106,7 @@ for REPOSITORY in announcementcenter \
                   twofactor_u2f \
                   twofactor_webauthn \
                   user_oidc \
+                  user_retention \
                   user_saml
 do
     URL="git@github.com:nextcloud/$REPOSITORY.git"
