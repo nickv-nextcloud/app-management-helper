@@ -34,7 +34,7 @@ set -e
 CHANGED="0"
 for FILE in appinfo/info.xml \
             package.json \
-            .github/workflows/update-christophwurst-nextcloud.yml
+            .github/workflows/update-nextcloud-ocp.yml
 do
   if [ -f $FILE ]; then
     echo ""

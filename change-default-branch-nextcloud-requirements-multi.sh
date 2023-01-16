@@ -33,7 +33,7 @@ set -e
 
 CHANGED="0"
 for FILE in appinfo/info.xml \
-            .github/workflows/update-christophwurst-nextcloud.yml
+            .github/workflows/update-nextcloud-ocp-matrix.yml
 do
   if [ -f $FILE ]; then
     echo ""
