@@ -52,7 +52,7 @@ do
     echo ""
     echo "Update $FILE"
     echo "======================"
-    gedit $FILE
+    gnome-text-editor $FILE
 
     echo ""
     echo "Add file to git status"
@@ -70,7 +70,7 @@ fi
 echo ""
 echo "Commit branch"
 echo "======================"
-git commit -m "Adjust testing matrix for Nextcloud $VERSION on $CORE_BRANCH
+git commit -m "chore(CI): Adjust testing matrix for Nextcloud $VERSION on $CORE_BRANCH
 
 Signed-off-by: Joas Schilling <coding@schilljs.com>"
 

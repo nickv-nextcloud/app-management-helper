@@ -34,13 +34,14 @@ set -e
 CHANGED="0"
 for FILE in appinfo/info.xml \
             package.json \
+            .github/workflows/phpunit-mysql.yml \
             .github/workflows/update-nextcloud-ocp.yml
 do
   if [ -f $FILE ]; then
     echo ""
     echo "Update $FILE"
     echo "======================"
-    gedit $FILE
+    gnome-text-editor $FILE
 
     echo ""
     echo "Add file to git status"
@@ -60,7 +61,7 @@ fi
 echo ""
 echo "Commit branch"
 echo "======================"
-git commit -m "Add Nextcloud $NEW_VERSION support on $DEFAULT_BRANCH
+git commit -m "feat(deps): Add Nextcloud $NEW_VERSION support on $DEFAULT_BRANCH
 
 Signed-off-by: Joas Schilling <coding@schilljs.com>"
 
