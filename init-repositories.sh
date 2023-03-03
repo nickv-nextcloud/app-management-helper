@@ -37,8 +37,7 @@ cd ../
 
 mkdir Stable
 cd Stable/
-for REPOSITORY in backup \
-                  data_request \
+for REPOSITORY in data_request \
                   deck \
                   end_to_end_encryption \
                   external \
@@ -58,7 +57,6 @@ for REPOSITORY in backup \
                   richdocuments \
                   sharepoint \
                   spreed \
-                  terms_of_service \
                   user_migration \
                   user_usage_report \
                   workflow_pdf_converter \
@@ -76,9 +74,9 @@ for REPOSITORY in announcementcenter \
                   calendar \
                   contacts \
                   files_antivirus \
+                  files_confidential \
                   files_downloadactivity \
                   files_downloadlimit \
-                  files_texteditor \
                   files_zip \
                   guests \
                   integration_discourse \
@@ -103,7 +101,8 @@ for REPOSITORY in announcementcenter \
                   registration \
                   social \
                   talk_matterbridge \
-                  twofactor_u2f \
+                  terms_of_service \
+                  translate \
                   twofactor_webauthn \
                   user_oidc \
                   user_retention \
