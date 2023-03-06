@@ -34,6 +34,8 @@ set -e
 CHANGED="0"
 for FILE in appinfo/info.xml \
             package.json \
+            renovate.json \
+            .github/dependabot.yml \
             .github/workflows/phpunit-mysql.yml \
             .github/workflows/update-nextcloud-ocp.yml
 do

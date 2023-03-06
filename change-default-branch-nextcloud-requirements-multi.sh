@@ -33,6 +33,8 @@ set -e
 
 CHANGED="0"
 for FILE in appinfo/info.xml \
+            renovate.json \
+            .github/dependabot.yml \
             .github/workflows/update-nextcloud-ocp-matrix.yml \
             .github/workflows/psalm-matrix.yml
 do
