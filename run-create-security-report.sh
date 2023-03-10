@@ -28,14 +28,14 @@ cd server/
     fi
 
     if [[ "$STILL_SKIP" = "0" ]]; then
-        echo "#"
-        echo "#"
-        echo "# ${dir##*/}"
-        echo "#"
-        echo "#"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m# ${dir##*/}\033[0m"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m#\033[0m"
         ../script-create-security-report.sh $BRANCH
     else
-        echo "Skipping ${dir##*/}"
+        echo -e "\033[0;30mSkipping ${dir##*/}\033[0m"
     fi
 
     dir="server/3rdparty"
@@ -44,16 +44,16 @@ cd server/
     fi
 
     if [[ "$STILL_SKIP" = "0" ]]; then
-        echo "#"
-        echo "#"
-        echo "# ${dir##*/}"
-        echo "#"
-        echo "#"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m# ${dir##*/}\033[0m"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m#\033[0m"
         cd ${dir##*/}
         ../../script-create-security-report.sh $BRANCH
         cd ..
     else
-        echo "Skipping ${dir##*/}"
+        echo -e "\033[0;30mSkipping ${dir##*/}\033[0m"
     fi
 cd ../
 
@@ -74,20 +74,20 @@ do
     fi
 
     if [[ "$STILL_SKIP" = "0" ]]; then
-        echo "#"
-        echo "#"
-        echo "# ${dir##*/}"
-        echo "#"
-        echo "#"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m# ${dir##*/}\033[0m"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m#\033[0m"
         cd ${dir##*/}
         ../../script-create-security-report.sh $BRANCH
         cd ..
     else
-        echo "Skipping ${dir##*/}"
+        echo -e "\033[0;30mSkipping ${dir##*/}\033[0m"
     fi
 done
 cd ../
 
-DATESTAMP=$(date -u +'%Y-%b')
+DATESTAMP=$(LANG=C date -u +'%Y-%b')
 mv security-report.txt security-report-$BRANCH-$DATESTAMP.txt
 

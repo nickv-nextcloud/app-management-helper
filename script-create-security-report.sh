@@ -35,24 +35,24 @@ COMPOSER_AUDIT=""
 if [ ! -f composer.json ]; then
 	echo "- [x] ⚙️ PHP: 🏳️ No composer.json" >> $SCRIPT_DIR/security-report.txt
 	echo ""
-	echo "🏳️ No composer.json"
+	echo -e "\033[1;35m🏳️  No composer.json\033[0m"
 	echo ""
 else
 	set +e
-	composer install --no-dev
-	COMPOSER_AUDIT=$(composer audit 2>&1)
+	composer install --no-ansi --no-dev
+	COMPOSER_AUDIT=$(composer audit --no-ansi 2>&1)
 	AUDIT_FAILED=$?
 	set -e
 
 	if [ "$AUDIT_FAILED" = "0" ]; then
 		echo "- [x] ⚙️ PHP: 🟢 No vulnerable depdendency" >> $SCRIPT_DIR/security-report.txt
 		echo ""
-		echo "🟢 All ⚙️ PHP packages okay!"
+		echo -e "\033[0;32m🟢 All ⚙️  PHP packages okay!\033[0m"
 		echo ""
 	else
 		echo "- [ ] ⚙️ PHP: ❌ Has at least one vulnerable depdendency" >> $SCRIPT_DIR/security-report.txt
 		echo ""
-		echo "❌ $REPO is depending on insecure ⚙️ PHP package"
+		echo -e "\033[0;31m❌ $REPO is depending on insecure ⚙️  PHP package\033[0m"
 		echo ""
 	fi
 fi
@@ -61,7 +61,7 @@ NPM_AUDIT=""
 if [ ! -f package.json ]; then
 	echo "- [x] 🖌️ JS: 🏳️ No package.json" >> $SCRIPT_DIR/security-report.txt
 	echo ""
-	echo "🏳️ No package.json"
+	echo -e "\033[1;35m🏳️  No package.json\033[0m"
 	echo ""
 else
 	set +e
@@ -72,12 +72,12 @@ else
 	if [ "$AUDIT_FAILED" = "0" ]; then
 		echo "- [x] 🖌️ JS: 🟢 No vulnerable depdendency" >> $SCRIPT_DIR/security-report.txt
 		echo ""
-		echo "🟢 All 🖌️ JS packages okay!"
+		echo -e "\033[0;32m🟢 All 🖌️ JS packages okay!\033[0m"
 		echo ""
 	else
 		echo "- [ ] 🖌️ JS: ❌ Has at least one vulnerable depdendency" >> $SCRIPT_DIR/security-report.txt
 		echo ""
-		echo "❌ $REPO is depending on insecure 🖌️ JS package"
+		echo -e "\033[0;31m❌ $REPO is depending on insecure 🖌️ JS package\033[0m"
 		echo ""
 	fi
 fi
