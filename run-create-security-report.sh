@@ -33,7 +33,7 @@ cd server/
         echo -e "\033[0;36m# ${dir##*/}\033[0m"
         echo -e "\033[0;36m#\033[0m"
         echo -e "\033[0;36m#\033[0m"
-        ../script-create-security-report.sh $BRANCH
+        ../script-create-security-report.sh $BRANCH 1
     else
         echo -e "\033[0;30mSkipping ${dir##*/}\033[0m"
     fi
@@ -50,7 +50,7 @@ cd server/
         echo -e "\033[0;36m#\033[0m"
         echo -e "\033[0;36m#\033[0m"
         cd ${dir##*/}
-        ../../script-create-security-report.sh $BRANCH
+        ../../script-create-security-report.sh $BRANCH 1
         cd ..
     else
         echo -e "\033[0;30mSkipping ${dir##*/}\033[0m"
@@ -80,7 +80,7 @@ do
         echo -e "\033[0;36m#\033[0m"
         echo -e "\033[0;36m#\033[0m"
         cd ${dir##*/}
-        ../../script-create-security-report.sh $BRANCH
+        ../../script-create-security-report.sh $BRANCH 0
         cd ..
     else
         echo -e "\033[0;30mSkipping ${dir##*/}\033[0m"

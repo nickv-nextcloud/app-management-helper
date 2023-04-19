@@ -8,6 +8,8 @@ REPO=${PWD##*/}
 SCRIPT_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 PACKAGE_VERSION=$1
 HEAD_BRANCH=$1
+SKIP_MAINTAINERS=$2
+
 if [[ "$HEAD_BRANCH" = "master" ]]; then
 	HEAD_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 fi
@@ -26,6 +28,31 @@ echo "" >> $SCRIPT_DIR/security-report.txt
 echo "## [$REPO](https://github.com/nextcloud/$REPO) - [Security tab](https://github.com/nextcloud/$REPO/security/dependabot)" >> $SCRIPT_DIR/security-report.txt
 echo "" >> $SCRIPT_DIR/security-report.txt
 
+MAINTAINERS='@AndyScherzinger'
+if [ "$SKIP_MAINTAINERS" = "0" ]; then
+  if [ ! -f CODEOWNERS ]; then
+    if [ ! -f .github/CODEOWNERS ]; then
+      if [ ! -f docs/CODEOWNERS ]; then
+        echo -e "\033[0;31m❌ $REPO is missing the CODEOWNERS file\033[0m"
+        CODEOWNER_FILE='missing'
+      else
+        CODEOWNER_FILE='docs/CODEOWNERS'
+      fi
+    else
+      CODEOWNER_FILE='.github/CODEOWNERS'
+    fi
+  else
+    CODEOWNER_FILE='CODEOWNERS'
+  fi
+
+  if [ -f $CODEOWNER_FILE ]; then
+    echo -e "\033[0;36mReading maintainers from $CODEOWNER_FILE\033[0m"
+    MAINTAINERS=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml[ ]+@(.*)' | egrep -oEi '[ ]+@(.*)' | xargs)
+    echo -e "\033[1;35mMaintainers $MAINTAINERS\033[0m"
+  fi
+else
+  echo -e "\033[1;35mMaintainers skipped, falling back to $MAINTAINERS\033[0m"
+fi
 
 echo ""
 echo "Check composer.json"
@@ -51,6 +78,7 @@ else
 		echo ""
 	else
 		echo "- [ ] ⚙️ PHP: ❌ Has at least one vulnerable depdendency" >> $SCRIPT_DIR/security-report.txt
+		echo "  - Maintainers: $MAINTAINERS" >> $SCRIPT_DIR/security-report.txt
 		echo ""
 		echo -e "\033[0;31m❌ $REPO is depending on insecure ⚙️  PHP package\033[0m"
 		echo ""
@@ -76,6 +104,7 @@ else
 		echo ""
 	else
 		echo "- [ ] 🖌️ JS: ❌ Has at least one vulnerable depdendency" >> $SCRIPT_DIR/security-report.txt
+		echo "  - Maintainers: $MAINTAINERS" >> $SCRIPT_DIR/security-report.txt
 		echo ""
 		echo -e "\033[0;31m❌ $REPO is depending on insecure 🖌️ JS package\033[0m"
 		echo ""
