@@ -88,6 +88,37 @@ do
 done
 cd ../
 
+cd Enterprise/
+for dir in ./*/
+do
+    dir=${dir%*/}
+    if [[ "$SKIP_UNTIL" = "${dir##*/}" ]]; then
+        STILL_SKIP="0"
+    fi
+
+    if [[ "${dir##*/}" = "files_confidential" ]]; then
+      if ! [[ "$BRANCH" = "stable24" ]]; then
+        if ! [[ "$BRANCH" = "stable25" ]]; then
+            continue
+        fi
+      fi
+    fi
+
+    if [[ "$STILL_SKIP" = "0" ]]; then
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m# ${dir##*/}\033[0m"
+        echo -e "\033[0;36m#\033[0m"
+        echo -e "\033[0;36m#\033[0m"
+        cd ${dir##*/}
+        ../../script-create-security-report.sh $BRANCH 0
+        cd ..
+    else
+        echo -e "\033[0;30mSkipping ${dir##*/}\033[0m"
+    fi
+done
+cd ../
+
 DATESTAMP=$(LANG=C date -u +'%Y-%b')
 mv security-report.txt security-report-$BRANCH-$DATESTAMP.txt
 

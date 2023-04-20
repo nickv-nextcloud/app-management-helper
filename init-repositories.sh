@@ -113,3 +113,17 @@ do
     git clone $URL
 done
 cd ../
+
+mkdir Enterprise
+cd Enterprise/
+for REPOSITORY in globalsiteselector \
+                  user_saml \
+                  approval \
+                  files_lock \
+                  files_confidential
+do
+    URL="git@github.com:nextcloud/$REPOSITORY.git"
+
+    git clone $URL
+done
+cd ../
