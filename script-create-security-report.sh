@@ -14,6 +14,60 @@ if [[ "$HEAD_BRANCH" = "master" ]]; then
 	HEAD_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 fi
 
+MAINTAINERS='@AndyScherzinger'
+if [ "$SKIP_MAINTAINERS" = "0" ]; then
+  echo ""
+  echo "Read maintainers from main branch $HEAD_BRANCH"
+  echo "======================"
+  git fetch origin $HEAD_BRANCH
+
+  MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  git fetch origin $HEAD_BRANCH
+  git checkout $HEAD_BRANCH
+  git reset --hard origin/$HEAD_BRANCH
+
+  if [ ! -f CODEOWNERS ]; then
+    if [ ! -f .github/CODEOWNERS ]; then
+      if [ ! -f docs/CODEOWNERS ]; then
+        echo -e "\033[0;31m❌ $REPO is missing the CODEOWNERS file\033[0m"
+        CODEOWNER_FILE='.github/CODEOWNERS'
+        touch $CODEOWNER_FILE
+      else
+        CODEOWNER_FILE='docs/CODEOWNERS'
+      fi
+    else
+      CODEOWNER_FILE='.github/CODEOWNERS'
+    fi
+  else
+    CODEOWNER_FILE='CODEOWNERS'
+  fi
+
+  if [ -f $CODEOWNER_FILE ]; then
+    echo -e "\033[0;36mReading maintainers from $CODEOWNER_FILE\033[0m"
+    INFOXML_OWNER=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml[ ]+@(.*)' | wc -l)
+    if [ "$INFOXML_OWNER" = "0" ]; then
+      set +e
+      git branch -D techdebt/noid/add-codeowners
+      set -e
+      echo '/appinfo/info.xml   ' >> $CODEOWNER_FILE
+      echo '' >> $CODEOWNER_FILE
+      gnome-text-editor $CODEOWNER_FILE
+      git checkout -b techdebt/noid/add-codeowners
+      git add $CODEOWNER_FILE
+      git commit -m "chore(maintainers): Update CODEOWNERS file
+
+Signed-off-by: Joas Schilling <coding@schilljs.com>"
+      git push --force origin techdebt/noid/add-codeowners
+      gh pr create --base $MAIN_BRANCH --title "chore(maintainers): Update CODEOWNERS file" --body "* Ref https://github.com/nextcloud/documentation/pull/10049"
+    fi
+    MAINTAINERS=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml[ ]+@(.*)' | egrep -oEi '[ ]+@(.*)' | xargs)
+    echo -e "\033[1;35mMaintainers $MAINTAINERS\033[0m"
+  fi
+else
+  echo -e "\033[1;35mMaintainers skipped, falling back to $MAINTAINERS\033[0m"
+fi
+
+
 echo ""
 echo "Fetch $HEAD_BRANCH"
 echo "======================"
@@ -27,32 +81,6 @@ git reset --hard origin/$HEAD_BRANCH
 echo "" >> $SCRIPT_DIR/security-report.txt
 echo "## [$REPO](https://github.com/nextcloud/$REPO) - [Security tab](https://github.com/nextcloud/$REPO/security/dependabot)" >> $SCRIPT_DIR/security-report.txt
 echo "" >> $SCRIPT_DIR/security-report.txt
-
-MAINTAINERS='@AndyScherzinger'
-if [ "$SKIP_MAINTAINERS" = "0" ]; then
-  if [ ! -f CODEOWNERS ]; then
-    if [ ! -f .github/CODEOWNERS ]; then
-      if [ ! -f docs/CODEOWNERS ]; then
-        echo -e "\033[0;31m❌ $REPO is missing the CODEOWNERS file\033[0m"
-        CODEOWNER_FILE='missing'
-      else
-        CODEOWNER_FILE='docs/CODEOWNERS'
-      fi
-    else
-      CODEOWNER_FILE='.github/CODEOWNERS'
-    fi
-  else
-    CODEOWNER_FILE='CODEOWNERS'
-  fi
-
-  if [ -f $CODEOWNER_FILE ]; then
-    echo -e "\033[0;36mReading maintainers from $CODEOWNER_FILE\033[0m"
-    MAINTAINERS=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml[ ]+@(.*)' | egrep -oEi '[ ]+@(.*)' | xargs)
-    echo -e "\033[1;35mMaintainers $MAINTAINERS\033[0m"
-  fi
-else
-  echo -e "\033[1;35mMaintainers skipped, falling back to $MAINTAINERS\033[0m"
-fi
 
 echo ""
 echo "Check composer.json"
