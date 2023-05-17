@@ -56,7 +56,6 @@ for REPOSITORY in data_request \
                   richdocuments \
                   sharepoint \
                   spreed \
-                  user_migration \
                   user_usage_report \
                   workflow_pdf_converter \
                   workflow_script
@@ -94,7 +93,6 @@ for REPOSITORY in announcementcenter \
                   officeonline \
                   preferred_providers \
                   quota_warning \
-                  ransomware_protection \
                   recognize \
                   registration \
                   social \
@@ -102,6 +100,7 @@ for REPOSITORY in announcementcenter \
                   terms_of_service \
                   translate \
                   twofactor_webauthn \
+                  user_migration \
                   user_oidc \
                   user_retention \
                   user_saml
