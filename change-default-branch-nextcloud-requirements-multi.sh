@@ -35,6 +35,7 @@ CHANGED="0"
 for FILE in appinfo/info.xml \
             renovate.json \
             .github/dependabot.yml \
+            .github/workflows/npm-audit-fix.yml \
             .github/workflows/update-nextcloud-ocp-matrix.yml \
             .github/workflows/psalm-matrix.yml
 do

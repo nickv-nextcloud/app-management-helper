@@ -36,7 +36,7 @@ for FILE in appinfo/info.xml \
             package.json \
             renovate.json \
             .github/dependabot.yml \
-            .github/workflows/phpunit-mysql.yml \
+            .github/workflows/npm-audit-fix.yml \
             .github/workflows/update-nextcloud-ocp.yml
 do
   if [ -f $FILE ]; then
