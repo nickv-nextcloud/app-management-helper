@@ -8,7 +8,6 @@ for REPOSITORY in activity \
                   circles \
                   files_pdfviewer \
                   files_rightclick \
-                  files_videoplayer \
                   firstrunwizard \
                   logreader \
                   nextcloud_announcements \
@@ -75,7 +74,6 @@ for REPOSITORY in announcementcenter \
                   contacts \
                   files_antivirus \
                   files_confidential \
-                  files_downloadactivity \
                   files_downloadlimit \
                   files_zip \
                   guests \
