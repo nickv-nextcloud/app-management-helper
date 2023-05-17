@@ -2,7 +2,8 @@
 #
 # Steps:
 # 1. Change `<nextcloud min-version="25" max-version="25" />`
-# 2. In Branched/ and Stable/ bump the Minor version of the app: `<version>1.12.0</version>`
+# 2. In Branched/ and Stable/ bump the MAJOR version of the app: `<version>X.0.0</version>`
+# 3. Add stableY to the list of branches on CI jobs
 
 STILL_SKIP="0"
 NEW_VERSION=$1
