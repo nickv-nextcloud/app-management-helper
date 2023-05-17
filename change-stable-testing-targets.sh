@@ -34,8 +34,22 @@ echo "======================"
 git checkout -b update-$CORE_BRANCH-target-versions
 
 CHANGED="0"
+
+if [ -f composer.json ]; then
+  HAS_OCP_DEPENDENCY=$(cat composer.json | grep 'nextcloud/ocp' | grep 'dev-master' | wc -l)
+
+  if [[ "$HAS_OCP_DEPENDENCY" = "1" ]]; then
+    composer require --dev nextcloud/ocp:dev-$CORE_BRANCH
+    git add composer.json
+    git add composer.lock
+    CHANGED="1"
+  fi
+fi
+
 for FILE in .travis.yml \
+            .drone.jsonnet \
             .drone.yml \
+            .github/workflows/cypress.yml \
             .github/workflows/oci.yml \
             .github/workflows/phpunit.yml \
             .github/workflows/phpunit-mysql.yml \
@@ -59,6 +73,11 @@ do
     echo "======================"
     git add $FILE
     CHANGED="1"
+
+    if [[ "$FILE" = ".drone.jsonnet" ]]; then
+      drone jsonnet --stream --format yml
+      git add .drone.yml
+    fi
   fi
 done
 
