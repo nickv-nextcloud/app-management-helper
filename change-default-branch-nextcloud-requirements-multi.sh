@@ -33,6 +33,7 @@ set -e
 
 CHANGED="0"
 for FILE in appinfo/info.xml \
+            package.json \
             renovate.json \
             .github/dependabot.yml \
             .github/workflows/npm-audit-fix.yml \
@@ -40,6 +41,13 @@ for FILE in appinfo/info.xml \
             .github/workflows/psalm-matrix.yml
 do
   if [ -f $FILE ]; then
+    if [[ "$FILE" = "package.json" ]]; then
+      npm version --no-git-tag-version $(xmllint --xpath '/info/version/text()' appinfo/info.xml)
+      git diff
+      git add package.json
+      git add package-lock.json
+    fi
+
     echo ""
     echo "Update $FILE"
     echo "======================"

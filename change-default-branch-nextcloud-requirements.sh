@@ -40,6 +40,13 @@ for FILE in appinfo/info.xml \
             .github/workflows/update-nextcloud-ocp.yml
 do
   if [ -f $FILE ]; then
+    if [[ "$FILE" = "package.json" ]]; then
+      npm version --no-git-tag-version $(xmllint --xpath '/info/version/text()' appinfo/info.xml)
+      git diff
+      git add package.json
+      git add package-lock.json
+    fi
+
     echo ""
     echo "Update $FILE"
     echo "======================"
