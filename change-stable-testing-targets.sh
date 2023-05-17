@@ -38,7 +38,11 @@ CHANGED="0"
 if [ -f composer.json ]; then
   HAS_OCP_DEPENDENCY=$(cat composer.json | grep 'nextcloud/ocp' | grep 'dev-master' | wc -l)
 
-  if [[ "$HAS_OCP_DEPENDENCY" = "1" ]]; then
+  if [[ "$CORE_BRANCH" = "main" ]]; then
+    echo -e "\033[1;35m🏳 No nextcloud/ocp update needed\033[0m"
+  elif [[ "$CORE_BRANCH" = "master" ]]; then
+    echo -e "\033[1;35m🏳 No nextcloud/ocp update needed\033[0m"
+  elif [[ "$HAS_OCP_DEPENDENCY" = "1" ]]; then
     composer require --dev nextcloud/ocp:dev-$CORE_BRANCH
     git add composer.json
     git add composer.lock
