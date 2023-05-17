@@ -9,6 +9,8 @@ set -e
 
 DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 
+echo -e "\033[1;35m🏳 Default branch: $DEFAULT_BRANCH\033[0m"
+
 echo "Fetch $DEFAULT_BRANCH"
 echo "======================"
 git fetch origin $DEFAULT_BRANCH
@@ -26,3 +28,4 @@ echo "======================"
 git checkout -b $BRANCH
 git push origin $BRANCH
 
+echo -e "\033[0;32m🟢 $BRANCH created\033[0m"

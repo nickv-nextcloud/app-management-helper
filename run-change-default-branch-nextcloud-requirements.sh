@@ -29,14 +29,14 @@ do
     if [[ "$STILL_SKIP" = "0" ]]; then
         echo "#"
         echo "#"
-        echo "# ${dir##*/}"
+        echo -e "# \033[1;35m${dir##*/}\033[0m"
         echo "#"
         echo "#"
         cd ${dir##*/}
         ../../change-default-branch-nextcloud-requirements.sh $NEW_VERSION
         cd ..
     else
-        echo "Skipping ${dir##*/}"
+        echo -e "\033[1;35m🏳 Skipping ${dir##*/}\033[0m"
     fi
 done
 cd ../
@@ -52,14 +52,14 @@ do
     if [[ "$STILL_SKIP" = "0" ]]; then
         echo "#"
         echo "#"
-        echo "# ${dir##*/}"
+        echo -e "# \033[1;35m${dir##*/}\033[0m"
         echo "#"
         echo "#"
         cd ${dir##*/}
         ../../change-default-branch-nextcloud-requirements.sh $NEW_VERSION
         cd ..
     else
-        echo "Skipping ${dir##*/}"
+        echo -e "\033[1;35m🏳 Skipping ${dir##*/}\033[0m"
     fi
 done
 cd ../
@@ -75,14 +75,14 @@ do
     if [[ "$STILL_SKIP" = "0" ]]; then
         echo "#"
         echo "#"
-        echo "# ${dir##*/}"
+        echo -e "# \033[1;35m${dir##*/}\033[0m"
         echo "#"
         echo "#"
         cd ${dir##*/}
         ../../change-default-branch-nextcloud-requirements-multi.sh $NEW_VERSION
         cd ..
     else
-        echo "Skipping ${dir##*/}"
+        echo -e "\033[1;35m🏳 Skipping ${dir##*/}\033[0m"
     fi
 done
 cd ../

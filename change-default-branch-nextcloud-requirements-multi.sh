@@ -54,8 +54,10 @@ done
 
 set +e
 
+git status
+
 if [[ "$CHANGED" = "0" ]]; then
-    echo "No update needed"
+    echo -e "\033[1;35m🏳 No update needed\033[0m"
     exit 1
 fi
 
