@@ -93,8 +93,7 @@ if [ ! -f composer.json ]; then
 	echo ""
 else
 	set +e
-	composer install --no-ansi --no-dev
-	COMPOSER_AUDIT=$(composer audit --no-ansi 2>&1)
+	COMPOSER_AUDIT=$(composer audit --locked --no-ansi 2>&1)
 	AUDIT_FAILED=$?
 	set -e
 
@@ -120,7 +119,7 @@ if [ ! -f package.json ]; then
 	echo ""
 else
 	set +e
-	NPM_AUDIT=$(npm audit)
+	NPM_AUDIT=$(npm audit --package-lock-only)
 	AUDIT_FAILED=$?
 	set -e
 
