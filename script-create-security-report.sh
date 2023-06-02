@@ -16,15 +16,14 @@ fi
 
 MAINTAINERS='@AndyScherzinger'
 if [ "$SKIP_MAINTAINERS" = "0" ]; then
-  echo ""
-  echo "Read maintainers from main branch $HEAD_BRANCH"
-  echo "======================"
-  git fetch origin $HEAD_BRANCH
-
   MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
-  git fetch origin $HEAD_BRANCH
-  git checkout $HEAD_BRANCH
-  git reset --hard origin/$HEAD_BRANCH
+
+  echo ""
+  echo "Read maintainers from main branch $MAIN_BRANCH"
+  echo "======================"
+  git fetch origin $MAIN_BRANCH
+  git checkout $MAIN_BRANCH
+  git reset --hard origin/$MAIN_BRANCH
 
   if [ ! -f CODEOWNERS ]; then
     if [ ! -f .github/CODEOWNERS ]; then
