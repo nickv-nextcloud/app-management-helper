@@ -55,6 +55,7 @@ for FILE in .travis.yml \
             .drone.yml \
             .github/workflows/cypress.yml \
             .github/workflows/oci.yml \
+            .github/workflows/performance.yml \
             .github/workflows/phpunit.yml \
             .github/workflows/phpunit-mysql.yml \
             .github/workflows/phpunit-oci.yml \
