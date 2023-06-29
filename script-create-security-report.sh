@@ -22,6 +22,7 @@ if [ "$SKIP_MAINTAINERS" = "0" ]; then
   echo "Read maintainers from main branch $MAIN_BRANCH"
   echo "======================"
   git fetch origin $MAIN_BRANCH
+
   git checkout $MAIN_BRANCH
   git reset --hard origin/$MAIN_BRANCH
 
@@ -45,22 +46,12 @@ if [ "$SKIP_MAINTAINERS" = "0" ]; then
     echo -e "\033[0;36mReading maintainers from $CODEOWNER_FILE\033[0m"
     INFOXML_OWNER=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml[ ]+@(.*)' | wc -l)
     if [ "$INFOXML_OWNER" = "0" ]; then
-      set +e
-      git branch -D techdebt/noid/add-codeowners
-      set -e
-      echo '/appinfo/info.xml   ' >> $CODEOWNER_FILE
-      echo '' >> $CODEOWNER_FILE
-      gnome-text-editor $CODEOWNER_FILE
-      git checkout -b techdebt/noid/add-codeowners
-      git add $CODEOWNER_FILE
-      git commit -m "chore(maintainers): Update CODEOWNERS file
-
-Signed-off-by: Joas Schilling <coding@schilljs.com>"
-      git push --force origin techdebt/noid/add-codeowners
-      gh pr create --base $MAIN_BRANCH --title "chore(maintainers): Update CODEOWNERS file" --body "* Ref https://github.com/nextcloud/documentation/pull/10049"
+      echo -e "\033[0;31m❌ $REPO is missing the CODEOWNERS for info.xml\033[0m"
     fi
     MAINTAINERS=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml[ ]+@(.*)' | egrep -oEi '[ ]+@(.*)' | xargs)
     echo -e "\033[1;35mMaintainers $MAINTAINERS\033[0m"
+  else
+    echo -e "\033[0;31m❌ $REPO is missing the CODEOWNERS\033[0m"
   fi
 else
   echo -e "\033[1;35mMaintainers skipped, falling back to $MAINTAINERS\033[0m"
