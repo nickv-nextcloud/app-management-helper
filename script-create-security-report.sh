@@ -64,6 +64,11 @@ echo "======================"
 git fetch origin $HEAD_BRANCH
 
 echo ""
+echo "Checkout $HEAD_BRANCH"
+echo "======================"
+git checkout $HEAD_BRANCH
+
+echo ""
 echo "Reset $HEAD_BRANCH"
 echo "======================"
 git reset --hard origin/$HEAD_BRANCH
