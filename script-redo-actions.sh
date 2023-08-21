@@ -56,6 +56,7 @@ for FILE in appstore-build-publish.yml \
             static-analysis.yml \
             psalm.yml \
             psalm-matrix.yml \
+            update-christophwurst-nextcloud.yml \
             update-nextcloud-ocp.yml \
             update-nextcloud-ocp-matrix.yml
 do
@@ -65,8 +66,17 @@ do
 
   if [[ "$FILE" = "static-analysis.yml" ]]; then
     if [ -f '.github/workflows/static-analysis.yml' ]; then
-      cp /home/nickv/Nextcloud/26/server/apps-action-templates/workflow-templates/psalm.yml .github/workflows/psalm.yml
-      mv .github/workflows/static-analysis.yml .github/workflows/psalm.yml
+      cp /home/nickv/Nextcloud/26/server/apps-action-templates/workflow-templates/psalm-matrix.yml .github/workflows/psalm-matrix.yml
+      mv .github/workflows/static-analysis.yml .github/workflows/psalm-matrix.yml
+      git add .github/workflows/
+    fi
+    continue
+  fi
+
+  if [[ "$FILE" = "update-christophwurst-nextcloud.yml" ]]; then
+    if [ -f '.github/workflows/update-christophwurst-nextcloud.yml' ]; then
+      gh repo set-default
+      gh issue create -t "Replace christophwurst/nextcloud package with nextcloud/ocp" -b "See the update-nextcloud-ocp.yml or update-nextcloud-ocp-matrix.yml (for multi version support) in https://github.com/nextcloud/.github/tree/master/workflow-templates"
     fi
     continue
   fi
