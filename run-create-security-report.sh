@@ -68,6 +68,7 @@ do
     if [[ "${dir##*/}" = "files_videoplayer" ]]; then
       if ! [[ "$BRANCH" = "stable23" ]]; then
         if ! [[ "$BRANCH" = "stable24" ]]; then
+            # Only supported until 24
             continue
         fi
       fi
@@ -97,10 +98,12 @@ do
     fi
 
     if [[ "${dir##*/}" = "files_confidential" ]]; then
-      if ! [[ "$BRANCH" = "stable24" ]]; then
-        if ! [[ "$BRANCH" = "stable25" ]]; then
+      # Only supported 26+
+      if [[ "$BRANCH" = "stable24" ]]; then
             continue
-        fi
+      fi
+      if [[ "$BRANCH" = "stable25" ]]; then
+            continue
       fi
     fi
 
