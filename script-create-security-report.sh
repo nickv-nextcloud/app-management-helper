@@ -14,7 +14,7 @@ if [[ "$HEAD_BRANCH" = "master" ]]; then
 	HEAD_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 fi
 
-MAINTAINERS='@AndyScherzinger'
+MAINTAINERS='@AndyScherzinger @sorbaugh'
 if [ "$SKIP_MAINTAINERS" = "0" ]; then
   MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 
