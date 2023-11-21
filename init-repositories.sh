@@ -27,7 +27,7 @@ for REPOSITORY in activity \
 do
     URL="git@github.com:nextcloud/$REPOSITORY.git"
     if [[ "$REPOSITORY" = "support" ]]; then
-    	URL="git@github.com:nextcloud-gmbh/$REPOSITORY.git"
+        URL="git@github.com:nextcloud-gmbh/$REPOSITORY.git"
     fi
 
     git clone $URL
@@ -95,6 +95,7 @@ for REPOSITORY in announcementcenter \
                   quota_warning \
                   recognize \
                   registration \
+                  security_guard \
                   social \
                   talk_matterbridge \
                   terms_of_service \
@@ -106,6 +107,10 @@ for REPOSITORY in announcementcenter \
                   user_saml
 do
     URL="git@github.com:nextcloud/$REPOSITORY.git"
+    if [[ "$REPOSITORY" = "security_guard" ]]; then
+        URL="git@github.com:nextcloud-gmbh/$REPOSITORY.git"
+    fi
+
 
     git clone $URL
 done
