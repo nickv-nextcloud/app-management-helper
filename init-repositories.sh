@@ -95,7 +95,6 @@ for REPOSITORY in announcementcenter \
                   quota_warning \
                   recognize \
                   registration \
-                  security_guard \
                   social \
                   talk_matterbridge \
                   terms_of_service \
@@ -107,9 +106,6 @@ for REPOSITORY in announcementcenter \
                   user_saml
 do
     URL="git@github.com:nextcloud/$REPOSITORY.git"
-    if [[ "$REPOSITORY" = "security_guard" ]]; then
-        URL="git@github.com:nextcloud-gmbh/$REPOSITORY.git"
-    fi
 
 
     git clone $URL
@@ -120,11 +116,14 @@ mkdir Enterprise
 cd Enterprise/
 for REPOSITORY in globalsiteselector \
                   user_saml \
-                  approval \
                   files_lock \
-                  files_confidential
+                  files_confidential \
+                  security_guard
 do
     URL="git@github.com:nextcloud/$REPOSITORY.git"
+    if [[ "$REPOSITORY" = "security_guard" ]]; then
+        URL="git@github.com:nextcloud-gmbh/$REPOSITORY.git"
+    fi
 
     git clone $URL
 done
