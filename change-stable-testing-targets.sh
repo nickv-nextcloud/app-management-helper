@@ -43,6 +43,9 @@ if [ -f composer.json ]; then
   elif [[ "$CORE_BRANCH" = "master" ]]; then
     echo -e "\033[1;35m🏳 No nextcloud/ocp update needed\033[0m"
   elif [[ "$HAS_OCP_DEPENDENCY" = "1" ]]; then
+    # Remove composer.lock and force update to fix broken repos
+    # rm composer.lock
+    # gnome-text-editor composer.json
     composer require --dev nextcloud/ocp:dev-$CORE_BRANCH
     git add composer.json
     git add composer.lock

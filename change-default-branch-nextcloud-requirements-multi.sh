@@ -36,6 +36,8 @@ for FILE in appinfo/info.xml \
             package.json \
             renovate.json \
             .github/dependabot.yml \
+            .github/workflows/phpunit-mysql.yml \
+            .github/workflows/phpunit-sqlite.yml \
             .github/workflows/npm-audit-fix.yml \
             .github/workflows/update-nextcloud-ocp-matrix.yml \
             .github/workflows/psalm-matrix.yml
