@@ -7,7 +7,6 @@ for REPOSITORY in activity \
                   bruteforcesettings \
                   circles \
                   files_pdfviewer \
-                  files_rightclick \
                   firstrunwizard \
                   logreader \
                   nextcloud_announcements \
@@ -69,6 +68,7 @@ cd ../
 mkdir Multibranch
 cd Multibranch/
 for REPOSITORY in announcementcenter \
+                  call_summary_bot \
                   calendar \
                   contacts \
                   files_antivirus \
