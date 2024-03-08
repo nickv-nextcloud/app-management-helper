@@ -29,7 +29,7 @@ fi
 echo ""
 echo "Creating issue"
 echo "======================"
-#gh issue create -t "Replace Travis with GitHub Actions" -b "Travis has stopped their free service. Please switch to GitHub Actions to continue CI testing. Check the app-tutorial app for some nice examples how to run basic phpunit tests and other things there: https://github.com/nextcloud/app-tutorial/tree/master/.github/workflows" >> ../../pr-list.txt
+#gh issue create -t "Please update github action workflows" -b "At least [update-nextcloud-ocp.yml](https://github.com/nextcloud/.github/blob/master/workflow-templates/update-nextcloud-ocp.yml) needs to be updated so you are informed about failures. My recent PR purged your composer.lock to allow installing the latest version, but you will miss when this breaks again, unless the action template is updated to the latest" >> ../../pr-list.txt
 
 echo $APP_ID  >> ../../pr-list.txt
 
