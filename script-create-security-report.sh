@@ -57,6 +57,13 @@ else
   echo -e "\033[1;35mMaintainers skipped, falling back to $MAINTAINERS\033[0m"
 fi
 
+echo ""
+echo "Detecting matching stable branch"
+echo "======================"
+if [ "${HEAD_BRANCH:0:6}" = "stable" ]; then
+  # https://github.com/nextcloud/guests/pull/1096#issuecomment-1881215509
+  HEAD_BRANCH=$(find-stable ${HEAD_BRANCH:6})
+fi
 
 echo ""
 echo "Fetch $HEAD_BRANCH"
@@ -89,7 +96,7 @@ if [ ! -f composer.json ]; then
 	echo ""
 else
 	set +e
-	COMPOSER_AUDIT=$(composer audit --locked --no-ansi 2>&1)
+	COMPOSER_AUDIT=$(composer audit --locked --no-ansi --no-interaction 2>&1)
 	AUDIT_FAILED=$?
 	set -e
 

@@ -65,10 +65,10 @@ do
         STILL_SKIP="0"
     fi
 
-    if [[ "${dir##*/}" = "files_videoplayer" ]]; then
-      if ! [[ "$BRANCH" = "stable23" ]]; then
-        if ! [[ "$BRANCH" = "stable24" ]]; then
-            # Only supported until 24
+    if [[ "${dir##*/}" = "files_rightclick" ]]; then
+      if ! [[ "$BRANCH" = "stable26" ]]; then
+        if ! [[ "$BRANCH" = "stable27" ]]; then
+            # Only supported until 27
             continue
         fi
       fi
@@ -99,9 +99,6 @@ do
 
     if [[ "${dir##*/}" = "files_confidential" ]]; then
       # Only supported 26+
-      if [[ "$BRANCH" = "stable24" ]]; then
-            continue
-      fi
       if [[ "$BRANCH" = "stable25" ]]; then
             continue
       fi
