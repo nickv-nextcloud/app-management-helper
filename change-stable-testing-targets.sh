@@ -72,6 +72,11 @@ for FILE in .travis.yml \
             .github/workflows/psalm.yml
 do
   if [ -f $FILE ]; then
+    HAS_OCP_DEPENDENCY=$(cat $FILE | grep 'master' | wc -l)
+    if [[ "$HAS_OCP_DEPENDENCY" = "0" ]]; then
+      continue
+    fi
+
     echo ""
     echo "Update $FILE"
     echo "======================"

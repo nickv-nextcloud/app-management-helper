@@ -48,6 +48,8 @@ do
       git diff
       git add package.json
       git add package-lock.json
+      CHANGED="1"
+      continue
     fi
 
     echo ""
