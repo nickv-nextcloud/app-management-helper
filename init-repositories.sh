@@ -82,19 +82,14 @@ for REPOSITORY in announcementcenter \
                   integration_google \
                   integration_jira \
                   integration_mastodon \
-                  integration_moodle \
                   integration_reddit \
-                  integration_twitter \
-                  integration_whiteboard \
                   integration_zammad \
-                  jsloader \
                   mail \
                   notify_push \
                   officeonline \
                   preferred_providers \
                   quota_warning \
                   recognize \
-                  registration \
                   social \
                   talk_matterbridge \
                   terms_of_service \
