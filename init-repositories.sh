@@ -42,6 +42,7 @@ for REPOSITORY in data_request \
                   files_accesscontrol \
                   files_automatedtagging \
                   files_fulltextsearch \
+                  files_lock \
                   files_retention \
                   flow_notifications \
                   fulltextsearch \
