@@ -44,11 +44,11 @@ if [ "$SKIP_MAINTAINERS" = "0" ]; then
 
   if [ -f $CODEOWNER_FILE ]; then
     echo -e "\033[0;36mReading maintainers from $CODEOWNER_FILE\033[0m"
-    INFOXML_OWNER=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml[ ]+@(.*)' | wc -l)
+    INFOXML_OWNER=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml\s+@(.*)' | wc -l)
     if [ "$INFOXML_OWNER" = "0" ]; then
       echo -e "\033[0;31m❌ $REPO is missing the CODEOWNERS for info.xml\033[0m"
     fi
-    MAINTAINERS=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml[ ]+@(.*)' | egrep -oEi '[ ]+@(.*)' | xargs)
+    MAINTAINERS=$(cat $CODEOWNER_FILE | egrep -oEi '^/appinfo/info.xml\s+@(.*)' | egrep -oEi '\s+@(.*)' | xargs)
     echo -e "\033[1;35mMaintainers $MAINTAINERS\033[0m"
   else
     echo -e "\033[0;31m❌ $REPO is missing the CODEOWNERS\033[0m"
