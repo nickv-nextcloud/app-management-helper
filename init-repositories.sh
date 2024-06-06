@@ -110,11 +110,12 @@ cd ../
 
 mkdir Enterprise
 cd Enterprise/
-for REPOSITORY in globalsiteselector \
-                  user_saml \
+for REPOSITORY in files_confidential \
                   files_lock \
-                  files_confidential \
-                  security_guard
+                  files_downloadlimit \
+                  globalsiteselector \
+                  security_guard \
+                  user_saml
 do
     URL="git@github.com:nextcloud/$REPOSITORY.git"
     if [[ "$REPOSITORY" = "security_guard" ]]; then
