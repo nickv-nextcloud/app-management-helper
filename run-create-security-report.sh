@@ -119,6 +119,6 @@ do
 done
 cd ../
 
-DATESTAMP=$(LANG=C date -u +'%Y-%b')
-mv security-report.txt security-report-$BRANCH-$DATESTAMP.txt
+DATESTAMP=$(LANG=C date -u +'%b')
+mv security-report.txt sec-$DATESTAMP-$BRANCH.txt
 
