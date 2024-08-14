@@ -21,6 +21,7 @@ for REPOSITORY in activity \
                   survey_client \
                   suspicious_login \
                   text \
+                  twofactor_nextcloud_notification \
                   twofactor_totp \
                   viewer
 do
@@ -77,14 +78,6 @@ for REPOSITORY in announcementcenter \
                   files_downloadlimit \
                   files_zip \
                   guests \
-                  integration_discourse \
-                  integration_github \
-                  integration_gitlab \
-                  integration_google \
-                  integration_jira \
-                  integration_mastodon \
-                  integration_reddit \
-                  integration_zammad \
                   mail \
                   notify_push \
                   officeonline \
