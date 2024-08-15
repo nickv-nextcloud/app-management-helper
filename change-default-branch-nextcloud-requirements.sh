@@ -31,6 +31,8 @@ git checkout -b update-$DEFAULT_BRANCH-version
 
 set -e
 
+php ../../bump-version.php $PWD $NEW_VERSION
+
 CHANGED="0"
 for FILE in appinfo/info.xml \
             package.json \
