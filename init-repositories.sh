@@ -46,9 +46,6 @@ for REPOSITORY in data_request \
                   files_lock \
                   files_retention \
                   flow_notifications \
-                  fulltextsearch \
-                  fulltextsearch_elasticsearch \
-                  globalsiteselector \
                   groupfolders \
                   impersonate \
                   ldap_contacts_backend \
@@ -78,13 +75,13 @@ for REPOSITORY in announcementcenter \
                   files_downloadlimit \
                   files_zip \
                   guests \
+                  hmr_enabler \
                   mail \
                   notify_push \
                   officeonline \
                   preferred_providers \
                   quota_warning \
                   recognize \
-                  social \
                   talk_matterbridge \
                   terms_of_service \
                   translate \
