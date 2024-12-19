@@ -122,8 +122,10 @@ if [ ! -f package.json ]; then
 	echo ""
 else
 	set +e
-	NPM_AUDIT=$(npm audit --package-lock-only)
+	NPM_AUDIT_ONLY=$(npm audit --package-lock-only --omit optional --omit dev)
 	AUDIT_FAILED=$?
+	# Run again with grep filter on the output
+	NPM_AUDIT=$(npm audit --package-lock-only --omit optional --omit dev | egrep -v '^\s{2,}[a-zA-Z@]')
 	set -e
 
 	if [ "$AUDIT_FAILED" = "0" ]; then
