@@ -84,7 +84,6 @@ for REPOSITORY in announcementcenter \
                   recognize \
                   talk_matterbridge \
                   terms_of_service \
-                  translate \
                   twofactor_webauthn \
                   user_migration \
                   user_oidc \
