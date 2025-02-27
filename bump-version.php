@@ -8,10 +8,11 @@ declare(strict_types=1);
 
 $content = file_get_contents($argv[1] . '/appinfo/info.xml');
 $serverVersion = $argv[2];
+$forceMultiBranchSupport = (bool)($argv[3] ?? false);
 $xml = simplexml_load_string($content);
 
 $bumpedMinVersion = false;
-if (isset($xml->dependencies?->nextcloud?->attributes()['min-version'])) {
+if (!$forceMultiBranchSupport && isset($xml->dependencies?->nextcloud?->attributes()['min-version'])) {
 	$minServer = (int) $xml->dependencies?->nextcloud?->attributes()['min-version'];
 	if ($minServer === ($serverVersion - 1)) {
 		$content = str_replace('nextcloud min-version="' . $minServer . '"', 'nextcloud min-version="' . $serverVersion . '"', $content);
@@ -30,7 +31,7 @@ $appVersion = (string) $xml->version;
 
 $versions = explode('.', $appVersion, 3);
 
-if ($bumpedMinVersion) {
+if (!$forceMultiBranchSupport && $bumpedMinVersion) {
 	$versions[0]++;
 	$versions[1] = '0';
 } else {
