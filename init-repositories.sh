@@ -54,6 +54,7 @@ for REPOSITORY in data_request \
                   richdocuments \
                   sharepoint \
                   spreed \
+                  user_migration \
                   user_usage_report \
                   workflow_pdf_converter \
                   workflow_script
@@ -85,7 +86,6 @@ for REPOSITORY in announcementcenter \
                   talk_matterbridge \
                   terms_of_service \
                   twofactor_webauthn \
-                  user_migration \
                   user_oidc \
                   user_retention \
                   user_saml
