@@ -4,6 +4,7 @@
 mkdir Branched
 cd Branched/
 for REPOSITORY in activity \
+                  app_api \
                   bruteforcesettings \
                   circles \
                   files_pdfviewer \
