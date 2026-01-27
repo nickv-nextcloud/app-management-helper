@@ -105,7 +105,7 @@ else
 	fi
 
 	# action pinning
-	WORKFLOWS_PINNED_VERSION=$(grep -E '[ ]*[ -] uses: ' .github/workflows/* | grep -vE '@[0-9a-f]{32}' | grep -vE 'uses: (github|codecov|actions|shivammathur|docker|cypress-io|buildjet|icewind1991|skjnldsv|ChristophWurst|nextcloud-releases|cachix|\.)/')
+	WORKFLOWS_PINNED_VERSION=$(grep -E '[ ]*[ -] uses: ' .github/workflows/* | grep -vE '@[0-9a-f]{32}' | grep -vE 'uses: (github|codecov|actions|shivammathur|docker|cypress-io|buildjet|icewind1991|skjnldsv|ChristophWurst|nextcloud-releases|cachix|docker:\/\/ghcr.io\/nextcloud|\.)/')
 	WORKFLOWS_PINNED_VERSION_STAT=$(echo "$WORKFLOWS_PINNED_VERSION" | grep "uses" | wc -l)
 	if [ "$WORKFLOWS_PINNED_VERSION_STAT" != "0" ]; then
 		WORKFLOWS_PINNED_VERSION=$(echo -e "Workflow files reference tags by version number or branch names instead of SHA of tags:\n$WORKFLOWS_PINNED_VERSION")
