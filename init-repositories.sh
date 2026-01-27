@@ -84,6 +84,7 @@ for REPOSITORY in announcementcenter \
                   preferred_providers \
                   quota_warning \
                   recognize \
+                  tables \
                   talk_matterbridge \
                   terms_of_service \
                   twofactor_webauthn \
