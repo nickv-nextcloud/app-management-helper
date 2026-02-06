@@ -40,7 +40,7 @@ do
         echo "#"
         echo "#"
         cd ${dir##*/}
-        ../../change-stable-testing-targets.sh $BRANCH $VERSION
+        ../../change-stable-testing-targets-and-version.sh $BRANCH $VERSION
         cd ..
     else
         echo -e "\033[1;35m🏳 Skipping ${dir##*/}\033[0m"
