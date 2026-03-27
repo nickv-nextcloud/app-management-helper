@@ -7,6 +7,7 @@ for REPOSITORY in activity \
                   app_api \
                   bruteforcesettings \
                   circles \
+                  files_downloadlimit \
                   files_pdfviewer \
                   firstrunwizard \
                   logreader \
@@ -74,7 +75,6 @@ for REPOSITORY in announcementcenter \
                   contacts \
                   files_antivirus \
                   files_confidential \
-                  files_downloadlimit \
                   files_zip \
                   guests \
                   hmr_enabler \
@@ -103,7 +103,6 @@ mkdir Enterprise
 cd Enterprise/
 for REPOSITORY in files_confidential \
                   files_lock \
-                  files_downloadlimit \
                   globalsiteselector \
                   security_guard \
                   user_saml
