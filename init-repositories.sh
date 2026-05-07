@@ -102,7 +102,6 @@ cd ../
 mkdir Enterprise
 cd Enterprise/
 for REPOSITORY in files_confidential \
-                  files_lock \
                   globalsiteselector \
                   security_guard \
                   user_saml
