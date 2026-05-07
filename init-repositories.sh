@@ -8,6 +8,7 @@ for REPOSITORY in activity \
                   bruteforcesettings \
                   circles \
                   files_downloadlimit \
+                  files_lock \
                   files_pdfviewer \
                   firstrunwizard \
                   logreader \
@@ -45,7 +46,6 @@ for REPOSITORY in data_request \
                   files_accesscontrol \
                   files_automatedtagging \
                   files_fulltextsearch \
-                  files_lock \
                   files_retention \
                   flow_notifications \
                   groupfolders \
