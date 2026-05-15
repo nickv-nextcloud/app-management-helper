@@ -113,7 +113,6 @@ Signed-off-by: Joas Schilling <coding@schilljs.com>"
 echo ""
 echo "Bump version"
 echo "======================"
-git checkout -b update-$CORE_BRANCH-versions
 php ../../bump-version-to-stable.php $PWD
 git add appinfo/info.xml
 
