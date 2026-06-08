@@ -14,6 +14,7 @@ for REPOSITORY in activity \
                   logreader \
                   nextcloud_announcements \
                   notifications \
+                  office \
                   password_policy \
                   photos \
                   privacy \
@@ -41,7 +42,6 @@ mkdir Stable
 cd Stable/
 for REPOSITORY in data_request \
                   deck \
-                  end_to_end_encryption \
                   external \
                   files_accesscontrol \
                   files_automatedtagging \
@@ -73,6 +73,7 @@ for REPOSITORY in announcementcenter \
                   call_summary_bot \
                   calendar \
                   contacts \
+                  end_to_end_encryption \
                   files_antivirus \
                   files_confidential \
                   files_zip \
