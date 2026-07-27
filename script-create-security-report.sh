@@ -174,7 +174,7 @@ else
 	NPM_AUDIT_ONLY=$(npm audit --package-lock-only --omit optional --omit dev)
 	AUDIT_FAILED=$?
 	# Run again with grep filter on the output
-	NPM_AUDIT=$(npm audit --package-lock-only --omit optional --omit dev | egrep -v '^\s{2,}[a-zA-Z@]')
+	NPM_AUDIT=$(npm audit --package-lock-only --omit optional --omit dev | egrep -v '^\s{2,}[a-zA-Z@]' | grep -v 'https://github.com/advisories/')
 	set -e
 
 	if [ "$AUDIT_FAILED" = "0" ]; then
