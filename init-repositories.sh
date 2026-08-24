@@ -7,6 +7,7 @@ for REPOSITORY in activity \
                   app_api \
                   bruteforcesettings \
                   circles \
+                  dbdoctor \
                   files_downloadlimit \
                   files_lock \
                   files_pdfviewer \
