@@ -45,8 +45,10 @@ for FILE in appinfo/info.xml \
 do
   if [ -f $FILE ]; then
     if [[ "$FILE" = "package.json" ]]; then
+      set +e
       npm version --no-git-tag-version $(xmllint --xpath '/info/version/text()' appinfo/info.xml)
-      git diff
+      set -e
+      git diff package.json package-lock.json
       git add package.json
       git add package-lock.json
       CHANGED="1"

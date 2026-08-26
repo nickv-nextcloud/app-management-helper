@@ -123,7 +123,7 @@ echo "Commit branch"
 echo "======================"
 git commit -m "chore(branchoff): Set version on $CORE_BRANCH to a stable one
 
-Signed-off-by: Joas Schilling <coding@schilljs.com>"
+Signed-off-by: Joas Schilling <coding@schilljs.com>" || echo "Version already stable"
 
 echo ""
 echo "Push branch"
