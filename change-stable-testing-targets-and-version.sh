@@ -33,6 +33,23 @@ echo "Checkout branch"
 echo "======================"
 git checkout -b update-$CORE_BRANCH-target-versions
 
+
+echo ""
+echo "Bump version"
+echo "======================"
+php ../../bump-version-to-stable.php $PWD
+git add appinfo/info.xml
+
+git status
+
+echo ""
+echo "Commit branch"
+echo "======================"
+git commit -m "chore(branchoff): Set version on $CORE_BRANCH to a stable one
+
+Signed-off-by: Joas Schilling <coding@schilljs.com>" || echo "Version already stable"
+
+
 CHANGED="0"
 
 if [ -f composer.json ]; then
@@ -109,6 +126,17 @@ git status
 
 if [[ "$CHANGED" = "0" ]]; then
     echo -e "\033[1;35m🏳 No update needed\033[0m"
+
+    echo ""
+    echo "Push branch"
+    echo "======================"
+    git push --force origin update-$CORE_BRANCH-target-versions
+
+    echo ""
+    echo "Create PR"
+    echo "======================"
+    gh pr create --base $CORE_BRANCH --fill-first >> ../../pr-list.txt
+
     exit 1
 fi
 
@@ -118,22 +146,6 @@ echo "======================"
 git commit -m "chore(CI): Adjust testing matrix for Nextcloud $VERSION on $CORE_BRANCH
 
 Signed-off-by: Joas Schilling <coding@schilljs.com>"
-
-
-echo ""
-echo "Bump version"
-echo "======================"
-php ../../bump-version-to-stable.php $PWD
-git add appinfo/info.xml
-
-git status
-
-echo ""
-echo "Commit branch"
-echo "======================"
-git commit -m "chore(branchoff): Set version on $CORE_BRANCH to a stable one
-
-Signed-off-by: Joas Schilling <coding@schilljs.com>" || echo "Version already stable"
 
 echo ""
 echo "Push branch"
