@@ -43,10 +43,20 @@ if [ -f composer.json ]; then
   elif [[ "$CORE_BRANCH" = "master" ]]; then
     echo -e "\033[1;35m🏳 No nextcloud/ocp update needed\033[0m"
   elif [[ "$HAS_OCP_DEPENDENCY" = "1" ]]; then
-    # Remove composer.lock and force update to fix broken repos
-    # rm composer.lock
-    # gnome-text-editor composer.json
-    composer require --dev nextcloud/ocp:dev-$CORE_BRANCH
+    CURRENT_PLATFORM=$(sed -n '/"platform"/,/}/s/.*"php"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' composer.json)
+    case "$CURRENT_PLATFORM" in
+      8.2.*) NEW_PLATFORM=8.3.16 ;;
+      8.1.*) NEW_PLATFORM=8.3.16 ;;
+      8.2)   NEW_PLATFORM=8.3 ;;
+      8.1)   NEW_PLATFORM=8.3 ;;
+      *)     NEW_PLATFORM=$CURRENT_PLATFORM ;;
+    esac
+    if [[ "$NEW_PLATFORM" != "$CURRENT_PLATFORM" ]]; then
+      sed -i "/\"platform\"/,/}/s/\(\"php\"[[:space:]]*:[[:space:]]*\"\)$CURRENT_PLATFORM\"/\1$NEW_PLATFORM\"/" composer.json
+      echo "🟡 PHP platform: $CURRENT_PLATFORM -> $NEW_PLATFORM"
+    fi
+
+    composer require --dev -W nextcloud/ocp:dev-$CORE_BRANCH
     git add composer.json
     git add composer.lock
     CHANGED="1"

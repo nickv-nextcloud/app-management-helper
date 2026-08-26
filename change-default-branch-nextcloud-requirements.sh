@@ -34,6 +34,30 @@ set -e
 php ../../bump-version.php $PWD $NEW_VERSION
 
 CHANGED="0"
+if [ -f composer.json ]; then
+  HAS_OCP_DEPENDENCY=$(cat composer.json | grep 'nextcloud/ocp' | grep 'dev-master' | wc -l)
+
+  if [[ "$HAS_OCP_DEPENDENCY" = "1" ]]; then
+    CURRENT_PLATFORM=$(sed -n '/"platform"/,/}/s/.*"php"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' composer.json)
+    case "$CURRENT_PLATFORM" in
+      8.2.*) NEW_PLATFORM=8.3.16 ;;
+      8.1.*) NEW_PLATFORM=8.3.16 ;;
+      8.2)   NEW_PLATFORM=8.3 ;;
+      8.1)   NEW_PLATFORM=8.3 ;;
+      *)     NEW_PLATFORM=$CURRENT_PLATFORM ;;
+    esac
+    if [[ "$NEW_PLATFORM" != "$CURRENT_PLATFORM" ]]; then
+      sed -i "/\"platform\"/,/}/s/\(\"php\"[[:space:]]*:[[:space:]]*\"\)$CURRENT_PLATFORM\"/\1$NEW_PLATFORM\"/" composer.json
+      echo "🟡 PHP platform: $CURRENT_PLATFORM -> $NEW_PLATFORM"
+    fi
+
+    composer require --dev -W nextcloud/ocp:dev-master
+    git add composer.json
+    git add composer.lock
+    CHANGED="1"
+  fi
+fi
+
 for FILE in appinfo/info.xml \
             package.json \
             renovate.json \
