@@ -90,6 +90,7 @@ for REPOSITORY in announcementcenter \
                   talk_matterbridge \
                   terms_of_service \
                   twofactor_webauthn \
+                  upload_monitor \
                   user_oidc \
                   user_retention \
                   user_saml
